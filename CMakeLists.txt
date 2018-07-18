@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(px4_control)
+project(dji_control)
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -10,7 +10,6 @@ project(px4_control)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
-  mavros_msgs
   nav_msgs
   roscpp
   std_msgs
@@ -18,7 +17,10 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   tf
   cmake_modules
+  dji_sdk
 )
+
+find_package(DJIOSDK REQUIRED)
 
 add_message_files(DIRECTORY msg FILES
    PVA.msg
@@ -46,14 +48,15 @@ catkin_package(
 
 
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
   ${Eigen_INCLUDE_DIRS}
 )
 
-add_executable(px4_control_node 
-	           src/px4_control.cpp 
-	           src/HelperFunctions/helper.cpp
-	           src/HelperFunctions/QuatRotEuler.cpp
+add_executable(dji_control_node 
+	     src/dji_control.cpp 
+	     src/HelperFunctions/helper.cpp
+	     src/HelperFunctions/QuatRotEuler.cpp
              src/Callbacks/callbacks.cpp
              src/Threads/FSMTask.cpp
              src/Threads/joyTask.cpp
@@ -63,9 +66,9 @@ add_executable(px4_control_node
              src/pevents/pevents.cpp
              src/Services/services.cpp
              src/structs.cpp)
-target_link_libraries(px4_control_node ${catkin_LIBRARIES})
+target_link_libraries(dji_control_node ${catkin_LIBRARIES} ${DJIOSDK_LIBRARIES})
 
 #This makes sure that messages and services are compiled before the rest
-add_dependencies(px4_control_node px4_control_generate_messages_cpp)
-add_dependencies(px4_control_node ${catkin_EXPORTED_TARGETS})
+add_dependencies(dji_control_node dji_control_generate_messages_cpp dji_sdk_generate_messages_cpp)
+add_dependencies(dji_control_node ${catkin_EXPORTED_TARGETS})
 

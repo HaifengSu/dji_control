@@ -4,7 +4,9 @@
 #include "../globals.h"
 
 //Get Px4 state
-void stateCallback(const mavros_msgs::State::ConstPtr &msg);
+//void stateCallback(const mavros_msgs::State::ConstPtr &msg);
+//Get dji state
+void stateCallback(const std_msgs::UInt8::ConstPtr &msg);
 
 //Get odometry for the quadcopter
 void odomCallback(const nav_msgs::Odometry::ConstPtr &msg);

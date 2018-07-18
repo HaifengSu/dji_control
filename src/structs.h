@@ -89,7 +89,7 @@ struct StateMachine{
 	int MODE_POSITION_ROS;
 
 	int POS_CONTROL_LOCAL;
-	int POS_CONTROL_PX4;
+	//int POS_CONTROL_PX4;
 
 	int POS_REF_WORLD;
 	int POS_REF_BODY;
@@ -117,6 +117,17 @@ struct PosControlParam{
 	double gz;
 	double thrustRatio;
 };
+
+typedef struct ServiceAck{
+  bool result;
+  int cmd_set;
+  int cmd_id;
+  unsigned int ack_data;
+  ServiceAck(bool res, int set, int id, unsigned int ack):
+      result(res), cmd_set(set), cmd_id(id), ack_data(ack) {};
+  ServiceAck() {};
+}ServiceAck;
+
 
 //Initialize PVA structure
 void initializePVA(PVA_structure &PVA);

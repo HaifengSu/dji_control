@@ -14,6 +14,9 @@ joyStruct driverXbox360(sensor_msgs::Joy msg);
 //Driver for receiving data from a wired Xbox 360 controller
 joyStruct driverXbox360Wired(sensor_msgs::Joy msg);
 
+//Driver for receiving data from xeox controller
+joyStruct driverXeox(sensor_msgs::Joy msg);
+
 //Function for low-pass filtering position references for quadcopter
 PVA_structure filterJoy(PVA_structure PVA_refPrev,
                         Eigen::Vector3d Vel_ref,

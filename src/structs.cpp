@@ -103,7 +103,7 @@ void initializeStateMachine(StateMachine &FSM){
 	FSM.MODE_POSITION_ROS = 3;	//Position control with references from a ROS topic
 
 	FSM.POS_CONTROL_LOCAL = 0;	//Control is made through the current node
-	FSM.POS_CONTROL_PX4 = 1;	//Control is made through PX4 software
+	//FSM.POS_CONTROL_PX4 = 1;	//Control is made through PX4 software
 
 	FSM.POS_REF_WORLD = 0;		//Joysticks references integrate in world frame
 	FSM.POS_REF_BODY = 1;		//Joystick references integrate in body frame
@@ -131,8 +131,9 @@ void printCurrentState(StateMachine FSM){
 	if(FSM.PosControlMode == FSM.POS_CONTROL_LOCAL){
 		ROS_INFO("Position Control Mode: LOCAL");
 	}
+  /*
 	else if(FSM.PosControlMode == FSM.POS_CONTROL_PX4){
 		ROS_INFO("Position Control Mode: PX4");
-	}
+	} */
 }
 
